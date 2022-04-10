@@ -8,7 +8,9 @@ const sectionThree = document.createElement("section");
 sectionThree.classList.add("three");
 
 body.appendChild(main);
-main.append(sectionOne, sectionTwo, sectionThree);
+main.append(sectionTwo, sectionThree);
+// main.append(sectionOne, sectionTwo, sectionThree);
+
 
 const coin = {
     state: 0,
@@ -45,55 +47,9 @@ const coin = {
         return image;
     }
 }
-const arrCoin = [];
-
-let count = 0;
-let maxValue = 20;
-
-for (let index = 0; index < maxValue; index++) {
-    arrCoin.push({
-        viewFlip: coin.flip(0, 99),
-        viewText: coin.toString(),
-        viewImage: coin.toHTML()
-    });
-}
-
-const myInterval = setInterval(() => {
-    let zero = 0;
-    let um = 0;
-
-    if (count === arrCoin.length) {
-        clearInterval(myInterval);
-        sectionOne.innerText = "";
-
-        const paragraphHeads = document.createElement("p");
-        const paragraphTails = document.createElement("p");
-
-        arrCoin.filter(({
-            viewFlip
-        }) => viewFlip === 0 ? zero++ : um++)
-
-        paragraphHeads.innerText = `Heads : ${zero}`;
-        paragraphTails.innerText = `Tails : ${um}`;
-
-        sectionOne.append(paragraphHeads, paragraphTails);
-    } else {
-        setTimeout(() => {
-            sectionOne.innerText = "";
-
-            const paragraphCoin = document.createElement("p");
-            paragraphCoin.innerText = `${arrCoin[count].viewText}`;
-
-            sectionOne.append(arrCoin[count].viewImage, paragraphCoin);
-        }, 750);
-
-        sectionOne.innerText = "";
-    }
-
-    count++;
-}, 1000);
 
 function display20Flips() {
+    let count = 0;
     let zero = 0;
     let um = 0;
     const results = [];
@@ -108,12 +64,14 @@ function display20Flips() {
 
     const displayFlips = setInterval(() => {
         if (count < results.length) {
+            console.log(count)
+            console.log(results[count]);
+
             const paragraph = document.createElement("p");
             paragraph.innerText = results[count];
-            setTimeout(() => {
-                sectionTwo.innerText = "";
-                sectionTwo.append(paragraph);
-            }, 1000);
+
+            sectionTwo.innerText = "";
+            sectionTwo.append(paragraph);
         } else {
             clearInterval(displayFlips);
             sectionTwo.innerText = "";
@@ -129,13 +87,14 @@ function display20Flips() {
         }
 
         count++;
-    }, 1500);
+    }, 2000);
 
     return results;
 }
-// display20Flips();
+display20Flips();
 
 function display20Images() {
+    let count = 0;
     let zero = 0;
     let um = 0;
     const results = [];
@@ -148,18 +107,16 @@ function display20Images() {
         }
     }
 
-    const myInterval = setInterval(() => {
+    const displayImages = setInterval(() => {
         if (count < results.length) {
-            setTimeout(() => {
-                sectionThree.innerText = "";
+            console.log(count)
+            console.log(results[count]);
 
-                const paragraph = document.createElement("p");
-                paragraph.innerText = results[count];
+            sectionThree.innerText = "";
 
-                sectionThree.append(paragraph);
-            }, 1000);
+            sectionThree.append(results[count]);
         } else {
-            clearInterval(myInterval);
+            clearInterval(displayImages);
             sectionThree.innerText = "";
 
             const paragraphHeads = document.createElement("p");
@@ -173,8 +130,64 @@ function display20Images() {
         }
 
         count++;
-    }, 1500);
+    }, 2000);
 
     return results;
 }
-// display20Images();
+display20Images();
+
+
+
+
+
+
+// 
+// const arrCoin = [];
+
+// let count = 0;
+// let maxValue = 20;
+
+// for (let index = 0; index < maxValue; index++) {
+//     arrCoin.push({
+//         viewFlip: coin.flip(0, 99),
+//         viewText: coin.toString(),
+//         viewImage: coin.toHTML()
+//     });
+// }
+
+// const myInterval = setInterval(() => {
+//     let zero = 0;
+//     let um = 0;
+
+//     if (count < arrCoin.length) {
+//         console.log(count)
+//         console.log(arrCoin[count])
+
+//         sectionOne.innerText = "";
+
+//         const paragraphCoin = document.createElement("p");
+//         paragraphCoin.innerText = `${arrCoin[count].viewText }`;
+
+//         sectionOne.append(arrCoin[count].viewImage, paragraphCoin);
+
+//         sectionOne.innerText = "";
+
+//     } else {
+//         clearInterval(myInterval);
+//         sectionOne.innerText = "";
+
+//         const paragraphHeads = document.createElement("p");
+//         const paragraphTails = document.createElement("p");
+
+//         arrCoin.filter(({
+//             viewFlip
+//         }) => viewFlip === 0 ? zero++ : um++)
+
+//         paragraphHeads.innerText = `Heads : ${zero}`;
+//         paragraphTails.innerText = `Tails : ${um}`;
+
+//         sectionOne.append(paragraphHeads, paragraphTails);
+//     }
+
+//     count++;
+// }, 2000);
